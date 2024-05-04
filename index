@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Camera(ha-ha-ha)</title>
+    </head>
+    <body>
+        <video autoplay id="video"></video>
+        <input type="button" value="Старт" id="start">
+        <input type="button" value="Стоп" id="stop">
+        <style>
+            video{
+                transform: rotateY(180deg);
+            }
+        </style>
+    </body>
+
+    <script>
+        const pleer = document.getElementById('video');
+        const bStart = document.getElementById('start');
+        const bStop = document.getElementById('stop');
+        
+        bStart.addEventListener('click', ()=>{
+            (async function(){
+                const stream = await navigator.mediaDevices.getUserMedia({audio: false, video: true});
+                pleer.srcObject = stream;
+            })()
+        });
+        bStop.addEventListener('click', ()=>{
+            (async function(){
+                pleer.srcObject = undefined;
+            })();
+        });
+    </script>
+</html>    
